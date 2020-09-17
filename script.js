@@ -1,6 +1,5 @@
 /****************** SCOPE ******************/
 
-/*
 var x = 2; // Global scope
 
 function foo()
@@ -12,21 +11,17 @@ function foo()
 
 foo();
 console.log(x); // 2
-*/
 
 
 /****************** HOISTING ******************/
 
-/*
 x = 5;
 console.log(x);
 var x;
-*/
 
 
 /****************** BLOCK SCOPE ******************/
 
-/*
 var x = 5;
 {
   console.log(x); // 5
@@ -35,7 +30,6 @@ var x = 5;
   console.log(x); // 3
 }
 console.log(x); // 3
-*/
 
 /*
 var x = 5;
@@ -113,8 +107,6 @@ console.log(b); // 4
 */
 
 // Not allowed
-/*
 var a = 4;
 let a = 6;
 console.log(a); // a has already been declared
-*/
