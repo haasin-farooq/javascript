@@ -107,6 +107,176 @@ console.log(b); // 4
 */
 
 // Not allowed
+/*
 var a = 4;
 let a = 6;
 console.log(a); // a has already been declared
+*/
+
+
+
+// 18/09/20 - Friday 
+/****************** CONST ******************/
+
+/*
+const x = 3;
+console.log(x); // 3
+
+{
+  const x = 4;
+  console.log(x); // 4
+}
+
+{
+  const x = 5;
+  console.log(x); // 5
+}
+
+console.log(x); //3
+*/
+
+
+/****************** ARROW FUNCTIONS ******************/
+
+/*
+var hello = function() {
+  return "hello";
+}
+console.log(hello());
+
+hello2 = () => {
+  return "hello2";
+}
+console.log(hello2());
+
+hello3 = () => "hello3";
+console.log(hello3());
+
+hello4 = (num) => "hello" + num;
+console.log(hello4(4));
+*/
+
+
+/****************** ASYNCHRONOUS JAVASCRIPT ******************/
+
+/*
+const foo1 = () => {
+  setTimeout(() => {
+    console.log('foo1');
+  }, 2000);
+}
+
+const foo2 = () => {
+  console.log('foo2');
+}
+
+foo1();
+foo2();
+console.log('foo3');
+*/
+
+
+/*
+function getRecipe() {
+  setTimeout(() => {
+    const recipeID = [523, 442, 542, 552, 387];
+    console.log(recipeID);
+
+    setTimeout((id) => {
+      const recipe = {title: 'Pasta', publisher: 'John'};
+      console.log(id + ': ' + recipe.title);
+
+      setTimeout((publisher) => {
+        const recipe = {title: 'Pizza', publisher: publisher};
+        console.log(recipe);
+      }, 1500, recipe.publisher);
+
+    }, 1500, recipeID[2]); // recipeID is defined in the parent scope
+
+  }, 1500);
+}
+getRecipe();
+*/
+
+
+/****************** Promises ******************/
+
+const getIDs = new Promise((resolve, reject) => { // executer function
+  setTimeout(() => { // async call
+    resolve([523, 442, 542, 552, 387]); // returns the data from the fulfilled promise
+  }, 1500);
+});
+
+const getRecipe = (recipeID) => {
+  return new Promise((resolve, reject) => {
+    setTimeout((ID) => {
+      const recipe = {title: 'Pasta', publisher: 'John'};
+      resolve(ID + ': ' + recipe.title);
+    }, 1500, recipeID);
+  });
+};
+
+const getRelated = (publisher) => {
+  return new Promise((resolve, reject) => {
+    setTimeout((pub) => {
+      const recipe = {title: 'Pizza', publisher: 'John'};
+      resolve(pub + ': ' + recipe.title);
+    }, 1500, publisher);
+  });
+};
+
+getIDs
+.then((IDs) => { // handling the fulfilled state | has a callback that takes in as argument the fulfilled data
+  console.log(IDs);
+  return getRecipe(IDs[2]);
+})
+.then((recipe) => {
+  console.log(recipe);
+  return getRelated('John');
+})
+.then((recipe) => {
+  console.log(recipe);
+})
+.catch((error) => {
+  console.log(error);
+});
+
+console.log(this);
+
+
+/****************** PROMISE.ALL ******************/
+
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 1 resolved');
+  }, 1500);
+});
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 2 resolved');
+  }, 1500);
+});
+
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 3 resolved');
+  }, 1500);
+});
+
+Promise.all([promise1, promise2, promise3])
+.then((values) => {
+  console.log(values);
+});
+
+
+/****************** MORE ON SCOPE ******************/
+
+{
+  let x = 3;
+  {
+    let x = 5;
+    console.log(x); // Since x is in the parent scope, it can be accessed here
+  }
+  console.log(x);
+}
