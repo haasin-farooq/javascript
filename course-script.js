@@ -467,3 +467,286 @@ console.log(mark.tips);
 console.log(mark.finalAmount);
 
 calculateAverage(john.tips, mark.tips);
+
+
+// 22/09/2020 - Tuesday
+
+/*
+var john = {
+  name: 'John',
+  yearOfBirth: 1990,
+  job: 'teacher'
+};
+*/
+
+/****************** FUNCTION CONSTRUCTOR ******************/
+
+/*
+var Person = function(name, yearOfBirth, job) {
+  this.name = name;
+  this.yearOfBirth = yearOfBirth;
+  this.job = job;
+}
+
+Person.prototype.calculateAge = function() {
+  console.log(2020 - this.yearOfBirth);
+}
+
+Person.prototype.lastName = 'Smith';
+
+var john = new Person('John', 1990, 'teacher');
+var jane = new Person('Jane', 1969, 'designer');
+var mark = new Person('Mark', 1995, 'driver');
+
+john.calculateAge();
+*/
+
+
+/****************** PRIMITIVES VS. OBJECTS ******************/
+
+/*
+// Primitives
+var a = 23;
+var b = a;
+a = 46;
+console.log(a);
+console.log(b);
+
+// Objects
+var obj1 = {
+  name: 'John',
+  age: 26
+};
+var obj2 = obj1;
+obj1.age = 30;
+console.log(obj1);
+console.log(obj2);
+
+// Functions
+var age = 27;
+var obj = {
+  name: 'Jonas',
+  city: 'Lisbon'
+};
+
+function change(a, b) {
+  a = 30;
+  b.city = 'San Francisco';
+}
+
+change(age, obj);
+console.log(age);
+console.log(obj);
+*/
+
+
+/****************** PASSING FUNCTIONS AS ARGUMENTS ******************/
+
+/*
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  var arrRes = [];
+  for(var i = 0; i < arr.length; i++) {
+    arrRes.push(fn(arr[i]));
+  }
+  return arrRes;
+}
+
+function calculateAge(year) {
+  return (2020 - year);
+}
+
+var ages = arrayCalc(years, calculateAge);
+console.log(ages);
+*/
+
+
+/****************** FUNCTIONS RETURNING FUNCTIONS ******************/
+
+/*
+function interviewQuestion(job) {
+  if(job === 'designer') {
+    return (name) => {
+      console.log(name + ', can you please explain what a UX design is?');
+    }
+  }
+  else if(job === 'teacher') {
+    return (name) => {
+      console.log(name + ', what subjects do you teach?');
+    }
+  }
+}
+
+var teacherQuestion = interviewQuestion('teacher');
+teacherQuestion('John');
+
+var designerQuestion = interviewQuestion('designer');
+designerQuestion('John');
+
+interviewQuestion('teacher')('Mark');
+*/
+
+
+/****************** IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE) ******************/
+
+/*
+function game() {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+}
+game();
+
+// Data privacy using IIFE
+(function () {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+})();
+*/
+
+
+/****************** CLOSURES ******************/
+
+/*
+function retirement(retirementAge) {
+  var a = ' years left until retirement.';
+  return (yearOfBirth) => {
+    var age = 2020 - yearOfBirth;
+    console.log((retirementAge - age) + a);
+  }
+}
+retirement(65)(1998);
+
+function interviewQuestion(job) {
+  return (name) => {
+    if(job === 'teacher') {
+      console.log(name + ', can you please explain what a UX design is?');
+    }
+    else if(job === 'designer') {
+      console.log(name + ', what subjects do you teach?');
+    }
+  }
+}
+
+var teacherQuestion = interviewQuestion('teacher');
+teacherQuestion('John');
+*/
+
+
+/****************** BIND, CALL AND APPLY ******************/
+
+/*
+var john = {
+  name: 'John',
+  age: 26,
+  job: 'teacher',
+  presentation: function(style, timeOfDay) {
+    if(style === 'formal') {
+      console.log('Good ' + timeOfDay + ', ladies and gentlemen! I\'m '
+      + this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age
+      + ' years old.');
+    }
+    else if(style === 'friendly') {
+      console.log('Hey! What\'s up? ' + 'I\'m '
+      + this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age
+      + ' years old. Have a nice ' + timeOfDay + '.');
+    }
+  }
+};
+
+var emily = {
+  name: 'Emily',
+  age: 35,
+  job: 'designer'
+};
+
+john.presentation('formal', 'morning');
+
+// Method borrowing - the call method allows us to set the this variable
+john.presentation.call(emily, 'friendly', 'afternoon');
+
+// john.presentation.apply(emily, ['friendly', 'afternoon']);
+
+var johnFriendly = john.presentation.bind(john, 'friendly');
+johnFriendly('evening');
+johnFriendly('night');
+
+var emilyFormal = john.presentation.bind(emily, 'formal');
+emilyFormal('morning');
+
+// Fucntions as arguments
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  var arrRes = [];
+  for(var i = 0; i < arr.length; i++) {
+    arrRes.push(fn(arr[i]));
+  }
+  return arrRes;
+}
+
+function calculateAge(year) {
+  return (2020 - year);
+}
+
+function isFullAge(limit, age) {
+  return (age >= limit);
+}
+
+var ages = arrayCalc(years, calculateAge); // This function takes a function as parameter which has only
+console.log(ages);                         // one parameter. But isFullAge has 2 parameters. So we'll
+                                           // preset the limit parameter
+
+var fullAgeJapan = arrayCalc(years, isFullAge.bind(this, 30));
+console.log(fullAgeJapan);
+*/
+
+
+/****************** CODING CHALLENGE 7 ******************/
+
+(function() {
+  var Question = function(question, answers, correctAnswer) {
+    this.question = question;
+    this.answers = answers;
+    this.correctAnswer = correctAnswer;
+  };
+
+  var questions = ['Is JavaScript a cool language?', 'Is this course useful?', 'Is web development boring?'];
+  var answers = ['0: Yes', '1: No'];
+  var correctAnswers = [0, 0, 1];
+  var questionsObj = [];
+
+  for(var i = 0; i < questions.length; i++) {
+    questionsObj[i] = new Question(questions[i], answers, correctAnswers[i]);
+  }
+
+  Question.prototype.showQuestion = function() {
+    console.log(this.question);
+    for(let i = 0; i < this.answers.length; i++) {
+      console.log(this.answers[i]);
+    }
+  }
+
+  Question.prototype.checkAnswer = function(chosenAnswer) {
+    if(chosenAnswer === this.correctAnswer) {
+      console.log('The answer is correct!');
+    }
+    else {
+      console.log('The answer is incorrect.');
+    }
+  }
+
+  function nextQuestion() {
+    var questionIndex = Math.floor(Math.random() * 3);
+    questionsObj[questionIndex].showQuestion();
+    var chosenAnswer = prompt('Input the correct answer:');
+
+    if(chosenAnswer !== 'exit') {
+      questionsObj[questionIndex].checkAnswer(parseInt(chosenAnswer));
+      nextQuestion();
+    }
+  }
+
+  nextQuestion();
+})();
+
