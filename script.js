@@ -1,5 +1,6 @@
 /****************** SCOPE ******************/
 
+/*
 var x = 2; // Global scope
 
 function foo()
@@ -11,17 +12,21 @@ function foo()
 
 foo();
 console.log(x); // 2
+*/
 
 
 /****************** HOISTING ******************/
 
+/*
 x = 5;
 console.log(x);
 var x;
+*/
 
 
 /****************** BLOCK SCOPE ******************/
 
+/*
 var x = 5;
 {
   console.log(x); // 5
@@ -30,6 +35,7 @@ var x = 5;
   console.log(x); // 3
 }
 console.log(x); // 3
+*/
 
 /*
 var x = 5;
@@ -114,8 +120,6 @@ console.log(a); // a has already been declared
 */
 
 
-
-// 18/09/20 - Friday 
 /****************** CONST ******************/
 
 /*
@@ -201,6 +205,7 @@ getRecipe();
 
 /****************** Promises ******************/
 
+/*
 const getIDs = new Promise((resolve, reject) => { // executer function
   setTimeout(() => { // async call
     resolve([523, 442, 542, 552, 387]); // returns the data from the fulfilled promise
@@ -242,10 +247,12 @@ getIDs
 });
 
 console.log(this);
+*/
 
 
 /****************** PROMISE.ALL ******************/
 
+/*
 const promise1 = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve('Promise 1 resolved');
@@ -268,10 +275,12 @@ Promise.all([promise1, promise2, promise3])
 .then((values) => {
   console.log(values);
 });
+*/
 
 
 /****************** MORE ON SCOPE ******************/
 
+/*
 {
   let x = 3;
   {
@@ -280,3 +289,80 @@ Promise.all([promise1, promise2, promise3])
   }
   console.log(x);
 }
+*/
+
+
+/****************** HTML WEB STORAGE ******************/
+
+/*
+// localStorage
+localStorage.setItem('name', 'Haasin');
+var name = localStorage.getItem('name');
+console.log(name); // Haasin
+
+localStorage.removeItem('name');
+var name = localStorage.getItem('name');
+console.log(name); // null
+
+// sessionStorage
+sessionStorage.name = 'Haasin';
+var name = sessionStorage.name;
+console.log(name);
+
+sessionStorage.removeItem('name');
+var name = sessionStorage.name;
+console.log(name);
+
+// Cookies
+document.cookie = "username = Haasin Farooq";
+var x = document.cookie;
+console.log(x);
+*/
+
+
+/****************** FOR EACH AND MAP ******************/
+
+/*
+// forEach()
+var arr = [2, 6, 9, 3, 7];
+var sum = 0;
+
+arr.forEach(calculateSum);
+function calculateSum(num) {
+  sum += num;
+}
+console.log(sum);
+
+arr.forEach(updateElement);
+function updateElement(num, index, array) {
+  array[index] = num * 10;
+}
+console.log(arr);
+*/
+
+/*
+// map()
+var arr = [2, 6, 9, 3, 7];
+var sum = 0;
+
+var newArr = arr.map(calculateSum);
+function calculateSum(num) {
+  return sum += num;
+}
+console.log(newArr);
+
+var newArr = arr.map(updateElement);
+function updateElement(num, index, array) {
+  return array[index] = num * 10;
+}
+console.log(newArr);
+*/
+
+// filter()
+var arr = [2, 4, 6, 8, 3];
+
+var newArr = arr.filter(greaterThanFive);
+function greaterThanFive(num) {
+  return num > 5;
+}
+console.log(newArr);
