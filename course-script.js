@@ -750,3 +750,274 @@ console.log(fullAgeJapan);
   nextQuestion();
 })();
 
+
+
+// 24/09/2020 - Thhursday
+/****************** Lecture: Spread Operator ******************/
+
+/*
+function addFourAges(a, b, c, d) {
+  return a + b + c + d;
+}
+
+var sum1 = addFourAges(18, 30, 12, 21);
+console.log(sum1);
+
+//ES5
+var ages = [18, 30, 12, 21];
+var sum2 = addFourAges.apply(null, ages);
+console.log(sum2);
+
+//ES6
+const sum3 = addFourAges(...ages); // Spread operator
+console.log(sum3);
+
+
+
+const h1 = document.querySelector('h1');
+const boxes = document.querySelectorAll('.box');
+
+const all = [h1, ...boxes];
+
+Array.from(all).forEach(current => {
+  current.style.color = 'purple';
+});
+*/
+
+
+/****************** Lecture: Rest Parameters ******************/
+
+/*
+// ES5
+function isFullAge5(limit) {
+  // console.log(arguments);
+  var argsArr = Array.prototype.slice.call(arguments, 1);
+
+  argsArr.forEach(function(current) {
+    console.log((2020 - current) >= limit);
+  });
+}
+isFullAge5(21, 1990, 1999, 1965, 2016, 2002);
+
+// ES6
+function isFullAge6(limit, ...years) {
+  years.forEach(current => console.log((2020-current) >= limit));
+}
+isFullAge6(16, 1990, 1999, 2016, 2002);
+*/
+
+
+/****************** Lecture: Default Parameters ******************/
+
+/*
+// ES6
+function smithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'American') {
+  this.firstName = firstName;
+  this.yearOfBirth = yearOfBirth;
+  this.lastName = lastName;
+  this.nationality = nationality;
+}
+
+var john = new smithPerson('John', 1990);
+var emily = new smithPerson('Emily', 1995, 'Diaz', 'Spanish');
+
+console.log(john, emily);
+*/
+
+
+/****************** Lecture: MAPS ******************/
+
+/*
+const question = new Map();
+question.set('question', 'What is the official name of the latest major JavaScript version?');
+question.set(1, 'ES5');
+question.set(2, 'ES6');
+question.set(3, 'ES2015');
+question.set(4, 'ES7');
+question.set('correct', 3);
+question.set(true, 'Correct answer!');
+question.set(false, 'Wrong answer, please try again.');
+
+// console.log(question.get('question'));
+// console.log(question.size);
+
+// question.delete(4);
+
+// if(question.has(4)) {
+//   // question.delete(4);
+//   console.log('Answer 4 is here');
+// }
+
+// question.clear();
+
+// question.forEach((value, key) => {
+//   console.log(`This is ${key} and it's set to ${value}`);
+// });
+
+console.log(question.get('question'));
+
+for(let [key, value] of question.entries()) {
+  if(typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+const ans = parseInt(prompt('Enter the correct answer:'));
+console.log(question.get(ans === question.get('correct')));
+*/
+
+
+/****************** Lecture: Classes ******************/
+
+/*
+// ES5
+// var Person5 = function(name, yearOfBirth, job) {
+//   this.name = name;
+//   this.yearOfBirth = yearOfBirth;
+//   this.job = job;
+// }
+//
+// Person5.prototype.calculateAge = function() {
+//   var age = new Date().getFullYear() - this.yearOfBirth;
+//   console.log(age);
+// }
+//
+// var john = new Person5('John', 1990, 'teacher');
+// john.calculateAge();
+
+// ES6
+class Person6 {
+  constructor(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+  }
+
+  calculateAge() {
+    const age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+  }
+
+  static greeting() {
+    console.log('Hey there!');
+  }
+}
+
+class Athlete6 extends Person6 {
+  constructor(name, yearOfBirth, job, oplympicGames, medals) {
+    super(name, yearOfBirth, job);
+    this.oplympicGames = oplympicGames;
+    this.medals = medals;
+  }
+
+  wonMedal() {
+    this.medals++;
+    console.log(this.medals);
+  }
+}
+
+Person6.greeting();
+
+const emily = new Person6('Emily', 1995, 'designer');
+emily.calculateAge();
+
+const john = new Athlete6('John', 1990, 'teacher', 'swimmer', 3);
+john.calculateAge();
+john.wonMedal();
+*/
+
+
+/****************** Lecture: Coding Challenge 8 ******************/
+
+/*
+
+Suppose that you're working in a small town administration, and you're
+in charge of two town elements:
+1. Parks
+2. Streets
+
+It's a very small town, so right now there are only 3 parks and 4 streets.
+All parks and streets have a name and a build year.
+
+At an end-of-year meeting, your boss wants a final report with the following:
+1. Tree density of each park in the town (forumla: number of trees/park area)
+2. Average age of each town's park (forumla: sum of all ages/number of parks)
+3. The name of the park that has more than 1000 trees
+4. Total and average length of the town's streets
+5. Size classification of all streets: tiny/small/normal/big/huge.
+If the size is unknown, the default is normal
+
+All the report data should be printed to the console.
+
+HINT: Use some of the ES6 features: classes, subclasses, template strings,
+default parameters, maps, arrow functions, destructuring, etc.
+
+*/
+
+class Element {
+  constructor(name, buildYear) {
+    this.name = name;
+    this.buildYear = buildYear;
+  }
+}
+
+class Park extends Element {
+  constructor(name, buildYear, numberOfTrees, area) {
+    super(name, buildYear);
+    this.numberOfTrees = numberOfTrees;
+    this.area = area;
+  }
+
+  calculateDensity() {
+    const density = this.numberOfTrees / this.area;
+    console.log(`${this.name} has a tree density of ${density} trees per square km.`);
+  }
+}
+
+class Street extends Element {
+  constructor(name, buildYear, length, size = 3) {
+    super(name, buildYear);
+    this.length = length;
+    this.size = size;
+  }
+
+  classification() {
+    const classification = new Map();
+    classification.set(1, 'tiny');
+    classification.set(2, 'small');
+    classification.set(3, 'normal');
+    classification.set(4, 'big');
+    classification.set(5, 'huge');
+
+    console.log(`${this.name}, built in ${this.buildYear}, is a ${classification.get(this.size)} street.`);
+  }
+}
+
+const allParks = [new Park('Green Park', 1987, 0.2, 215),
+new Park('National Park', 1894, 2.9, 3541),
+new Park('Oak Park', 1953, 0.4, 949)];
+
+const allStreets = [new Street('Ocean Avenue', 1999, 1.1, 4),
+new Street('Evergreen Street', 2008, 2.7, 2),
+new Street('Sunset Boulevard', 1982, 2.5, 5)];
+
+function calc(arr) {
+
+}
+
+function reportParks(p) {
+  console.log('-------- PARK REPORT --------');
+  p.forEach(current => current.calculateDensity());
+
+  p.forEach(current => () {
+
+  });
+}
+
+function reportStreets(s) {
+
+}
+
+reportParks(allParks);
+reportStreets(allStreets);
+
